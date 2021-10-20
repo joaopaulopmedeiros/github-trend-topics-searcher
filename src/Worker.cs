@@ -40,13 +40,13 @@ namespace Application
 
                 try
                 {
-                    var specification = await _getSpecificationFileService.RunAsync();
+                    var specification = await _getSpecificationFileService.ExecuteAsync();
 
-                    var topics = await _searchService.RunAsync(specification.SearchTerm);
+                    var topics = await _searchService.ExecuteAsync(specification.SearchTerm);
 
                     if (topics.Any())
                     {
-                        _emailService.Send(
+                        _emailService.Execute(
                             specification.Recipients,
                             EmailUtil.GetDefaultEmailSubject(),
                             EmailUtil.GetEmailBodyFromTopics(specification.SearchTerm, topics)
@@ -54,7 +54,7 @@ namespace Application
                     }
                     else
                     {
-                        _emailService.Send(
+                        _emailService.Execute(
                             specification.Recipients,
                             EmailUtil.GetDefaultEmailSubject(),
                             EmailUtil.GetTermNotFoundMessage(specification.SearchTerm)

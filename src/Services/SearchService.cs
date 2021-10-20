@@ -23,7 +23,7 @@ namespace Application.Services
         /// </summary>
         /// <param name="term">Search Term</param>
         /// <returns></returns>
-        public async Task<IEnumerable<TopicDto>> RunAsync(string term)
+        public async Task<IEnumerable<TopicDto>> ExecuteAsync(string term)
         {
             var url = $"https://github.com/topics/{term}";
 

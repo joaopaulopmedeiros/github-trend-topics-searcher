@@ -33,7 +33,7 @@ namespace Application.Services
         /// <param name="emails">Recipients</param>
         /// <param name="subject">Subject</param>
         /// <param name="body">Body</param>
-        public void Send(List<string> emails, string subject, string body)
+        public void Execute(List<string> emails, string subject, string body)
         {
             var loginInfo = new NetworkCredential(_login, _password);
 

@@ -5,7 +5,7 @@ namespace Infra.Data.Repositories
 {
     public class FileRepository
     {
-        private readonly string file = "D:\\side-projects\\searcher\\samples\\search.txt";
+        private readonly string file = "C:\\Users\\indra\\Desktop\\search.txt";
 
         public async Task<string> GetContentAsync()
         {

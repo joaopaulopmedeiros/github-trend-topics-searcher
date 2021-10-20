@@ -15,7 +15,7 @@ namespace Application.Services
             _repository = repository;
         }
 
-        public async Task<SpecificationFileDto> RunAsync()
+        public async Task<SpecificationFileDto> ExecuteAsync()
         {
             string content = await _repository.GetContentAsync();
 
