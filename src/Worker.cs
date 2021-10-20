@@ -12,12 +12,15 @@ namespace Application
     public class Worker : BackgroundService
     {
         private readonly GetSpecificationFileService _getSpecificationFileService;
+        private readonly EmailService _emailService;
         public Worker
         (
-            GetSpecificationFileService getSpecificationFileService
+            GetSpecificationFileService getSpecificationFileService,
+            EmailService emailService
         )
         {
             _getSpecificationFileService = getSpecificationFileService;
+            _emailService = emailService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -28,7 +31,11 @@ namespace Application
 
                 var specification = await _getSpecificationFileService.RunAsync();
 
-                await Task.Delay(1000, stoppingToken);
+                var content = "mock content";
+
+                _emailService.Send(specification.Recipients, "New search delivered", content);
+
+                await Task.Delay(10000, stoppingToken);
             }
         }
     }
