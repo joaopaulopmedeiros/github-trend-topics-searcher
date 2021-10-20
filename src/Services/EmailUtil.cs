@@ -27,7 +27,7 @@ namespace Application.Services
 
             foreach (var topic in topics)
             {
-                result += $"<li>Projeto: {topic.Title}";
+                result += $"<li>Project: {topic.Title}";
             }
 
             result += "</ul>";
