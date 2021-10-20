@@ -23,4 +23,4 @@ You can check this out using a <a href="https://mailtrap.io/">mailtrap</a> accou
 <img src="./.github/images/result.png">
 
 <hr>
-Made with ❤️ by joaopaulopmedeiros
+<div align="center">Made with ❤️ by joaopaulopmedeiros</div>
