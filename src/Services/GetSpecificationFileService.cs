@@ -1,10 +1,7 @@
 ﻿using Application.Dtos;
 using Infra.Data.Repositories;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -21,7 +18,7 @@ namespace Application.Services
         public async Task<SpecificationFileDto> RunAsync()
         {
             string content = await _repository.GetContentAsync();
-            
+
             Log.Information($">>> Content: {content}");
 
             string[] columns = content.Split(';');
@@ -31,7 +28,8 @@ namespace Application.Services
 
         private SpecificationFileDto MapFromFileToObject(string[] columns)
         {
-            return new SpecificationFileDto() {
+            return new SpecificationFileDto()
+            {
                 SearchTerm = columns[0],
                 Recipients = columns[1].Split(',').ToList(),
             };

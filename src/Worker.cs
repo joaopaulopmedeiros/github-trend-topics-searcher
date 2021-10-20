@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Application.Services;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application
 {
@@ -41,19 +40,21 @@ namespace Application
                     if (topics.Any())
                     {
                         _emailService.Send(
-                            specification.Recipients, 
-                            EmailUtil.GetDefaultEmailSubject(), 
+                            specification.Recipients,
+                            EmailUtil.GetDefaultEmailSubject(),
                             EmailUtil.GetEmailBodyFromTopics(specification.SearchTerm, topics)
                          );
-                    } else
+                    }
+                    else
                     {
                         _emailService.Send(
-                            specification.Recipients, 
-                            EmailUtil.GetDefaultEmailSubject(), 
+                            specification.Recipients,
+                            EmailUtil.GetDefaultEmailSubject(),
                             EmailUtil.GetTermNotFoundMessage(specification.SearchTerm)
                        );
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Log.Error($"Unexpected error: {ex}");
                 }

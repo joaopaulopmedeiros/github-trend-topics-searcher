@@ -38,9 +38,9 @@ namespace Application.Services
             foreach (var div in html)
             {
                 var item = div.QuerySelector(anchor).LastElementChild;
-                
+
                 var title = Sanitize(item);
-                
+
                 if (!string.IsNullOrEmpty(title))
                 {
                     results.Add(new TopicDto { Title = title });
