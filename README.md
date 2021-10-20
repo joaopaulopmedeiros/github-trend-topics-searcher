@@ -1,3 +1,9 @@
-Searcher
+<h1 align="center">Searcher</h1>
 
-A Windows Service for searching stuff
+## Features
+- Read keywords and list of e-mail recipients from text file;
+- Search content based on keywords;
+- Send e-mail with final result;
+
+<hr>
+Made with ❤️ by joaopaulopmedeiros
