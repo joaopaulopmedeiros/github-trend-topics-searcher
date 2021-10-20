@@ -18,7 +18,11 @@ namespace Application.Services
             context = BrowsingContext.New(config);
         }
 
-
+        /// <summary>
+        /// Scrap trend topics on github related to a given term
+        /// </summary>
+        /// <param name="term">Search Term</param>
+        /// <returns></returns>
         public async Task<IEnumerable<TopicDto>> RunAsync(string term)
         {
             var url = $"https://github.com/topics/{term}";

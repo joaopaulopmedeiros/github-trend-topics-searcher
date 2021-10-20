@@ -27,6 +27,12 @@ namespace Application.Services
             _port = Convert.ToInt32(_configuration["Email:Port"]);
         }
 
+        /// <summary>
+        /// Send e-mail
+        /// </summary>
+        /// <param name="emails">Recipients</param>
+        /// <param name="subject">Subject</param>
+        /// <param name="body">Body</param>
         public void Send(List<string> emails, string subject, string body)
         {
             var loginInfo = new NetworkCredential(_login, _password);

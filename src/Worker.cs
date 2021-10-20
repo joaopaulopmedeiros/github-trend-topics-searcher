@@ -43,7 +43,7 @@ namespace Application
                         _emailService.Send(
                             specification.Recipients, 
                             EmailUtil.GetDefaultEmailSubject(), 
-                            EmailUtil.GetEmailBodyFromTopics(topics)
+                            EmailUtil.GetEmailBodyFromTopics(specification.SearchTerm, topics)
                          );
                     } else
                     {

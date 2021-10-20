@@ -19,9 +19,11 @@ namespace Application.Services
             return $"No topic with the {term} term was found";
         }
 
-        public static string GetEmailBodyFromTopics(IEnumerable<TopicDto> topics)
+        public static string GetEmailBodyFromTopics(string term, IEnumerable<TopicDto> topics)
         {
-            string result = "<ul>";
+            string result = $"<p>Top popular projects on github related to {term}</p>";
+
+            result += "<ul>";
 
             foreach (var topic in topics)
             {
