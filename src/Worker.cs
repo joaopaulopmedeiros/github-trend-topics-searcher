@@ -25,6 +25,13 @@ namespace Application
             _emailService = emailService;
         }
 
+        /// <summary>
+        /// Get content from text file.
+        /// Search for github trend topics related to term found on file.
+        /// Send e-mail with result.
+        /// </summary>
+        /// <param name="stoppingToken"></param>
+        /// <returns></returns>
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
