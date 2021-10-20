@@ -11,6 +11,12 @@ This simple windows service might lead you to a better understanding of workers,
 - Search content based on a given term using github;
 - Send e-mail with final result;
 
+## The search.txt file
+
+```
+<your_search_term>; <email1>,<email2>,<email3>;
+```
+
 ## Result
 
 You can check this out using a <a href="https://mailtrap.io/">mailtrap</a> account or any e-mail provider.
