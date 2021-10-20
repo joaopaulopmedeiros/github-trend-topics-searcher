@@ -36,12 +36,22 @@ namespace Application
                 {
                     var specification = await _getSpecificationFileService.RunAsync();
 
-                    var response = await _searchService.RunAsync(specification.SearchTerms);
+                    var topics = await _searchService.RunAsync(specification.SearchTerm);
 
-                    if (response.IsSuccessStatusCode)
+                    if (topics.Any())
                     {
-                        var content = await response.Content.ReadAsStringAsync();
-                        _emailService.Send(specification.Recipients, "New search delivered", content);
+                        _emailService.Send(
+                            specification.Recipients, 
+                            EmailUtil.GetDefaultEmailSubject(), 
+                            EmailUtil.GetEmailBodyFromTopics(topics)
+                         );
+                    } else
+                    {
+                        _emailService.Send(
+                            specification.Recipients, 
+                            EmailUtil.GetDefaultEmailSubject(), 
+                            EmailUtil.GetTermNotFoundMessage(specification.SearchTerm)
+                       );
                     }
                 } catch (Exception ex)
                 {

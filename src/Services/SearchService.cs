@@ -1,30 +1,54 @@
-﻿using System;
+﻿using AngleSharp;
+using Application.Dtos;
+using Serilog;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Services
 {
     public class SearchService
     {
-        public async Task<HttpResponseMessage> RunAsync(List<string> Keywords)
-        {
-            var client = new HttpClient();
+        private IBrowsingContext context { get; set; }
+        private string container = "article.border.rounded.color-shadow-small.color-bg-subtle.my-4";
+        private string anchor = "h3.f3.color-fg-muted.text-normal.lh-condensed";
 
-            return await client.SendAsync(CreateRequestMessage(), CreateCancellationToken());
+        public SearchService()
+        {
+            var config = Configuration.Default.WithDefaultLoader();
+            context = BrowsingContext.New(config);
         }
 
-        private HttpRequestMessage CreateRequestMessage()
+
+        public async Task<IEnumerable<TopicDto>> RunAsync(string term)
         {
-            return new HttpRequestMessage();
+            var url = $"https://github.com/topics/{term}";
+
+            Log.Information($">>> Searching form term {term} on {url}");
+
+            var document = await context.OpenAsync(url);
+
+            var html = document.QuerySelectorAll(container);
+
+            var results = new List<TopicDto>();
+
+            foreach (var div in html)
+            {
+                var item = div.QuerySelector(anchor).LastElementChild;
+                
+                var title = Sanitize(item);
+                
+                if (!string.IsNullOrEmpty(title))
+                {
+                    results.Add(new TopicDto { Title = title });
+                }
+            }
+
+            return results;
         }
-        
-        private CancellationToken CreateCancellationToken()
+
+        private string Sanitize(AngleSharp.Dom.IElement item)
         {
-            return new CancellationToken();
+            return item?.InnerHtml.Trim().Replace("\n", "");
         }
     }
 }

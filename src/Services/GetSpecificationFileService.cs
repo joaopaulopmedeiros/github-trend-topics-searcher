@@ -32,7 +32,7 @@ namespace Application.Services
         private SpecificationFileDto MapFromFileToObject(string[] columns)
         {
             return new SpecificationFileDto() {
-                SearchTerms = columns[0].Split(',').ToList(),
+                SearchTerm = columns[0],
                 Recipients = columns[1].Split(',').ToList(),
             };
         }

@@ -9,9 +9,9 @@ namespace Application.Dtos
     public class SpecificationFileDto
     {
         /// <summary>
-        /// Search terms for building Report
+        /// Search term for building Report
         /// </summary>
-        public List<string> SearchTerms { get; set; }
+        public string SearchTerm { get; set; }
         /// <summary>
         /// People for sending e-mail with Report
         /// </summary>
