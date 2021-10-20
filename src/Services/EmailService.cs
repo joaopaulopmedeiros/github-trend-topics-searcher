@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -51,6 +52,8 @@ namespace Application.Services
             client.UseDefaultCredentials = false;
             client.Credentials = loginInfo;
             client.Send(msg);
+
+            Log.Information(">>> E-mail's been sent");
         }
 
         /// <summary>
