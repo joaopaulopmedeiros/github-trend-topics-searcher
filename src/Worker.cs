@@ -12,14 +12,17 @@ namespace Application
     public class Worker : BackgroundService
     {
         private readonly GetSpecificationFileService _getSpecificationFileService;
+        private readonly SearchService _searchService;
         private readonly EmailService _emailService;
         public Worker
         (
             GetSpecificationFileService getSpecificationFileService,
+            SearchService searchService,
             EmailService emailService
         )
         {
             _getSpecificationFileService = getSpecificationFileService;
+            _searchService = searchService;
             _emailService = emailService;
         }
 
@@ -29,11 +32,21 @@ namespace Application
             {
                 Log.Information($"Worker running at: {DateTimeOffset.Now}");
 
-                var specification = await _getSpecificationFileService.RunAsync();
+                try
+                {
+                    var specification = await _getSpecificationFileService.RunAsync();
 
-                var content = "mock content";
+                    var response = await _searchService.RunAsync(specification.SearchTerms);
 
-                _emailService.Send(specification.Recipients, "New search delivered", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        _emailService.Send(specification.Recipients, "New search delivered", content);
+                    }
+                } catch (Exception ex)
+                {
+                    Log.Error($"Unexpected error: {ex}");
+                }
 
                 await Task.Delay(10000, stoppingToken);
             }

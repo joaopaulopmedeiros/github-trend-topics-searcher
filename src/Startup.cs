@@ -20,6 +20,7 @@ namespace Application
             services.AddSingleton(configuration);
             services.AddTransient<FileRepository>();
             services.AddTransient<GetSpecificationFileService>();
+            services.AddTransient<SearchService>();
             services.AddTransient<EmailService>();
             services.AddHostedService<Worker>();
         }
