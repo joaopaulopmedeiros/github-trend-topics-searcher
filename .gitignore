@@ -34,4 +34,7 @@ msbuild.wrn
 .vs/
 
 # Logs
-*/logs/
+*/Logs/
+
+# Samples
+*/samples/

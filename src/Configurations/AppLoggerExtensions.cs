@@ -16,7 +16,7 @@ namespace Application.Configurations
                     .ReadFrom.Configuration(context.Configuration)
                     .Enrich.FromLogContext()
                     .WriteTo.Console()
-                    .WriteTo.File($"logs//{DateTime.Now.ToString("yyyyMMdd")}__log.txt");
+                    .WriteTo.File($"Logs//{DateTime.Now.ToString("yyyyMMdd")}__log.txt");
         }
     }
 }

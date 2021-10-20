@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Services;
+using Infra.Data.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -16,6 +18,8 @@ namespace Application
                     .Build();
 
             services.AddSingleton(configuration);
+            services.AddTransient<FileRepository>();
+            services.AddTransient<GetSpecificationFileService>();
             services.AddHostedService<Worker>();
         }
     }
